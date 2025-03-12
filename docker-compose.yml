@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  lifemap-vep-hail:
+    image: lifemap-vep-hail
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lifemap-vep-hail
+    cap_add:
+      - SYS_ADMIN
+    ports:
+      - "18080:8080"
+      - "18081:8081"
+      - "14040:4040"
+      - "18888:8888"
+    entrypoint: ["/home/ubuntu/entrypoint-hail.sh"]
+
+  lifemap-minio:
+    image: quay.io/minio/minio
+    container_name: lifemap-minio
+    environment:
+      MINIO_ROOT_USER: root
+      MINIO_ROOT_PASSWORD: passpass
+    #volumes:
+    #  - /mnt/scratch/ldic-varia/lifemap/:/scratch
+    command: server /scratch/minio/data/ --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
