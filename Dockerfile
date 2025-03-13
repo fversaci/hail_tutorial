@@ -56,9 +56,9 @@ RUN \
     && ln -s "spark-$SPARK_VER-bin-hadoop3" spark
 
 WORKDIR /spark/jars
-COPY varia/spark-defaults.conf /spark/conf
 RUN curl -LO 'https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar' \
     && curl -LO 'https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.1026/aws-java-sdk-bundle-1.11.1026.jar'
+COPY --chmod=644 varia/spark-defaults.conf /spark/conf
 
 ENV PYSPARK_DRIVER_PYTHON=python3
 ENV PYSPARK_PYTHON=python3
