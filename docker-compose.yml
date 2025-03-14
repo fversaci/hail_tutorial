@@ -1,12 +1,11 @@
 version: '3.8'
 
 services:
-  lifemap-vep-hail:
-    image: lifemap-vep-hail
+  jupyter:
+    image: hail_tutorial
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: lifemap-vep-hail
     cap_add:
       - SYS_ADMIN
     ports:

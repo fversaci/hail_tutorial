@@ -42,23 +42,24 @@ RUN \
     unzip \
     vim \
     wget \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* && apt-get clean
 
 ########################################################################
 # download and install spark
 ########################################################################
 ARG SPARK_V=3.5
 RUN \
-    export SPARK_VER=$(curl 'https://archive.apache.org/dist/spark/' | grep -o "$SPARK_V\.[[:digit:]]\+" | tail -n 1) \
+    export SPARK_VER=$(curl -L 'https://archive.apache.org/dist/spark/' | grep -o "$SPARK_V\.[[:digit:]]\+" | tail -n 1) \
     && echo $SPARK_VER > /tmp/spark_ver \
-    && cd /tmp && wget -nv "https://archive.apache.org/dist/spark/spark-$SPARK_VER/spark-$SPARK_VER-bin-hadoop3.tgz" \
+    && cd /tmp && curl -L --remote-name "https://archive.apache.org/dist/spark/spark-$SPARK_VER/spark-$SPARK_VER-bin-hadoop3.tgz" \
     && cd / && tar xfz "/tmp/spark-$SPARK_VER-bin-hadoop3.tgz" \
+    && rm -f "/tmp/spark-$SPARK_VER-bin-hadoop3.tgz" \
     && ln -s "spark-$SPARK_VER-bin-hadoop3" spark
 
 WORKDIR /spark/jars
-RUN curl -O 'https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar' \
-    && curl -O 'https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.1026/aws-java-sdk-bundle-1.11.1026.jar'
-COPY varia/spark-defaults.conf /spark/conf
+RUN curl -LO 'https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar' \
+    && curl -LO 'https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.1026/aws-java-sdk-bundle-1.11.1026.jar'
+COPY --chmod=644 varia/spark-defaults.conf /spark/conf
 
 ENV PYSPARK_DRIVER_PYTHON=python3
 ENV PYSPARK_PYTHON=python3
@@ -78,8 +79,8 @@ RUN mkdir -p /home/ubuntu/.config/fish/conf.d/ volume
 
 ### HAIL installation
 RUN python3 -m venv venv
-RUN . venv/bin/activate && pip3 install IPython hail tqdm jupyterlab
-# RUN . venv/bin/activate && pip3 install pyspark==$(cat /tmp/spark_ver)
+RUN . venv/bin/activate && pip3 install --no-cache-dir IPython hail tqdm jupyterlab
+# RUN . venv/bin/activate && pip3 install --no-cache-dir pyspark==$(cat /tmp/spark_ver)
 RUN echo 'source ~/venv/bin/activate.fish' >> ~/.config/fish/config.fish
 
 ########################################################################
