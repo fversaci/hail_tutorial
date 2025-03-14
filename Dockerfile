@@ -41,6 +41,7 @@ RUN \
     tmux \
     unzip \
     vim \
+    wget \
     && rm -rf /var/lib/apt/lists/* && apt-get clean
 
 ########################################################################
