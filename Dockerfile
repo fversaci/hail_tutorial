@@ -49,9 +49,9 @@ RUN \
 ########################################################################
 ARG SPARK_V=3.5
 RUN \
-    export SPARK_VER=$(curl -L 'https://archive.apache.org/dist/spark/' | grep -o "$SPARK_V\.[[:digit:]]\+" | tail -n 1) \
+    export SPARK_VER=$(curl -Li 'https://dlcdn.apache.org/spark/' | grep -o "$SPARK_V\.[[:digit:]]\+" | tail -n 1) \
     && echo $SPARK_VER > /tmp/spark_ver \
-    && cd /tmp && curl -L --remote-name "https://archive.apache.org/dist/spark/spark-$SPARK_VER/spark-$SPARK_VER-bin-hadoop3.tgz" \
+    && cd /tmp && curl -L --remote-name "https://dlcdn.apache.org/spark/spark-$SPARK_VER/spark-$SPARK_VER-bin-hadoop3.tgz" \
     && cd / && tar xfz "/tmp/spark-$SPARK_VER-bin-hadoop3.tgz" \
     && rm -f "/tmp/spark-$SPARK_VER-bin-hadoop3.tgz" \
     && ln -s "spark-$SPARK_VER-bin-hadoop3" spark
