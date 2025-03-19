@@ -56,8 +56,6 @@ The `notebooks` folder contains three Jupyter notebooks:
 
 - [**Hail_tutorial-GWAS-vcf.ipynb**](notebooks/Hail_tutorial-GWAS-vcf.ipynb):  
   A complete GWAS analysis using a VCF file.  
-- [**Hail_tutorial-GWAS-vcf-medium.ipynb**](notebooks/Hail_tutorial-GWAS-vcf-medium.ipynb):  
-  A medium-scale example of GWAS analysis.  
 - [**Hail_tutorial_GWAS_vcf_mini.ipynb**](notebooks/Hail_tutorial_GWAS_vcf_mini.ipynb):  
   A minimal version with essential GWAS code.  
 
