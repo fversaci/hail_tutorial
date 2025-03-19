@@ -52,12 +52,10 @@ Once you run a Jupyter notebook, the `data-hail` bucket will be created in MinIO
 
 ## 📂 Jupyter Notebooks  
 
-The `notebooks` folder contains three Jupyter notebooks:  
+The `notebooks` folder contains one Jupyter notebook:
 
 - [**Hail_tutorial-GWAS-vcf.ipynb**](notebooks/Hail_tutorial-GWAS-vcf.ipynb):  
   A complete GWAS analysis using a VCF file.  
-- [**Hail_tutorial_GWAS_vcf_mini.ipynb**](notebooks/Hail_tutorial_GWAS_vcf_mini.ipynb):  
-  A minimal version with essential GWAS code.  
 
 ---
 
