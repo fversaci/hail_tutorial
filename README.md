@@ -74,3 +74,8 @@ The `notebooks` folder contains one Jupyter notebook:
   docker compose down && docker compose up -d
   ```  
 
+- Print logs of the Jupyter Hub service if needed:
+
+  ```bash
+  docker compose logs -f jupyter
+  ```
