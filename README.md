@@ -19,7 +19,7 @@ Then, start the Docker environment:
 docker compose up -d
 ```
 
-On the first run, Docker will download two images:  
+On the first run, Docker will build two images:  
 
 - **`hail_tutorial`** – The environment for running the tutorials in a Jupyter Lab server.  
 - **`minio`** – A high-performance object storage service with an API compatible with Amazon S3.  
