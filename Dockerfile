@@ -100,4 +100,8 @@ COPY --chown=ubuntu:ubuntu notebooks notebooks
 EXPOSE 8888
 EXPOSE 8889
 
+# expose ports for spark driver
+EXPOSE 32123
+EXPOSE 32124
+
 ENTRYPOINT fish

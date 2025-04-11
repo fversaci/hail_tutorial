@@ -9,10 +9,11 @@ services:
     cap_add:
       - SYS_ADMIN
     ports:
-      - "18080:8080"
-      - "18081:8081"
-      - "14040:4040"
       - "18888:8888"
+      - "18080:8080"
+      - "14040:4040"
+      - "32123:32123"
+      - "32124:32124"
     entrypoint: ["/home/ubuntu/entrypoint-hail.sh"]
 
   lifemap-minio:
