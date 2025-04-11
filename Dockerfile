@@ -68,8 +68,12 @@ EXPOSE 8080
 EXPOSE 7077
 EXPOSE 4040
 
+ARG UID=1000
+ARG GID=1000
+
 RUN \
-    useradd -u 1000 -m -G sudo -s /usr/bin/fish -p '*' ubuntu \
+    groupadd -g $GID df \
+    && useradd -u $UID -g $GID -m -G sudo -s /usr/bin/fish -p '*' ubuntu \
     && sed -i 's/ALL$/NOPASSWD:ALL/' /etc/sudoers 
 RUN echo "ubuntu ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
@@ -79,7 +83,7 @@ RUN mkdir -p /home/ubuntu/.config/fish/conf.d/ volume
 
 ### HAIL installation
 RUN python3 -m venv venv
-RUN . venv/bin/activate && pip3 install --no-cache-dir IPython hail tqdm jupyterlab
+RUN . venv/bin/activate && pip3 install --no-cache-dir IPython hail tqdm jupyterlab matplotlib
 # RUN . venv/bin/activate && pip3 install --no-cache-dir pyspark==$(cat /tmp/spark_ver)
 RUN echo 'source ~/venv/bin/activate.fish' >> ~/.config/fish/config.fish
 
