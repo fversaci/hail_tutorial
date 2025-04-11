@@ -5,6 +5,12 @@ services:
     image: hail_tutorial
     build:
       context: .
+      args:
+        ftp_proxy: http://proxy.crs4.it:3128
+        http_proxy: http://proxy.crs4.it:3128
+        https_proxy: http://proxy.crs4.it:3128
+        # UID: 1000
+        # GID: 1000
       dockerfile: Dockerfile
     cap_add:
       - SYS_ADMIN
@@ -14,6 +20,8 @@ services:
       - "14040:4040"
       - "32123:32123"
       - "32124:32124"
+    # volumes:
+    #   - host_path:container_path
     entrypoint: ["/home/ubuntu/entrypoint-hail.sh"]
 
   lifemap-minio:
