@@ -83,7 +83,7 @@ RUN mkdir -p /home/ubuntu/.config/fish/conf.d/ volume
 
 ### HAIL installation
 RUN python3 -m venv venv
-RUN . venv/bin/activate && pip3 install --no-cache-dir IPython hail tqdm jupyterlab matplotlib
+RUN . venv/bin/activate && pip3 install --no-cache-dir IPython hail tqdm jupyterlab matplotlib scikit-learn statsmodels
 # RUN . venv/bin/activate && pip3 install --no-cache-dir pyspark==$(cat /tmp/spark_ver)
 RUN echo 'source ~/venv/bin/activate.fish' >> ~/.config/fish/config.fish
 
